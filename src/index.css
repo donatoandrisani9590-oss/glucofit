@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* GlucoFit Custom Theme */
+:root {
+  --glucofit-primary: #10b981;
+  --glucofit-danger: #ef4444;
+  --glucofit-warning: #f59e0b;
+}
+
+body {
+  @apply bg-slate-900 text-white min-h-screen;
+}
