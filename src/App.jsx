@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import SupplementTracker from './components/SupplementTracker';
 import WorkoutSelector from './components/WorkoutSelector';
+import StatsView from './components/StatsView';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('workout');
@@ -27,10 +28,7 @@ export default function App() {
         )}
         
         {activeTab === 'stats' && (
-          <div className="bg-slate-800 rounded-2xl p-6 text-center">
-            <span className="text-4xl">📊</span>
-            <p className="text-slate-400 mt-2">Stats kommen bald...</p>
-          </div>
+          <StatsView />
         )}
       </main>
 
