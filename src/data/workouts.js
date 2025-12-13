@@ -1,176 +1,464 @@
-// GlucoFit Elite 5-Day Plan - Vollständig anpassbar
-// Basierend auf: T1D, Infraspinatus-Reha, Schwachstelle Brust
+// src/data/workouts.js
+// GlucoFit Elite 2.0 - Medical Performance Split
+
+export const PREHAB_PROTOCOLS = {
+  shoulder_lock: {
+    name: "Shoulder-Lock Protokoll",
+    goal: "Humeruskopf zentrieren, Impingement vermeiden",
+    exercises: [
+      {
+        name: "Side-Lying External Rotation",
+        muscle: "Infraspinatus & Teres Minor",
+        execution: "Seitenlage. Handtuch zwischen Ellbogen und Rippen. Unterarm rotiert nach oben.",
+        sets: 2,
+        reps: "12-15",
+        note: "Kein Versagen, nur Aktivierung"
+      },
+      {
+        name: "Scapular Wall Slides",
+        muscle: "Serratus Anterior & Unterer Trapezius",
+        execution: "Rücken an Wand. Arme im W. Unterarme pressen gegen Wand und hoch schieben.",
+        sets: 2,
+        reps: "10 langsam"
+      },
+      {
+        name: "Band Pull-Aparts (Supiniert)",
+        muscle: "Rhomboiden & Pars Ascendens",
+        execution: "Handflächen nach OBEN (erzwingt Außenrotation). Band zur Brust ziehen.",
+        sets: 1,
+        reps: "20"
+      }
+    ]
+  },
+  pelvic_reset: {
+    name: "Pelvic-Reset Protokoll",
+    goal: "Hüftbeuger deaktivieren, Glutes/Core aktivieren",
+    exercises: [
+      {
+        name: "Dead Bug (Anti-Extension)",
+        muscle: "Transversus Abdominis & Obliques",
+        execution: "LWS presst in Boden. Arm/Bein absenken ohne Hohlkreuz.",
+        sets: 3,
+        reps: "5 pro Seite",
+        note: "Extrem langsam!"
+      },
+      {
+        name: "Cook Hip Lift",
+        muscle: "Gluteus Maximus (isoliert)",
+        execution: "Rückenlage. Ein Knie zur Brust (blockiert LWS). Anderes Bein drückt Hüfte hoch.",
+        sets: 2,
+        reps: "10 pro Seite"
+      }
+    ]
+  },
+  couch_stretch: {
+    name: "Couch Stretch (Post-Workout)",
+    goal: "Hüftbeuger öffnen",
+    exercises: [
+      {
+        name: "Couch Stretch",
+        muscle: "Iliopsoas & Rectus Femoris",
+        execution: "Knie an Wand. Po anspannen! Becken nach vorne schieben.",
+        sets: 1,
+        reps: "2 Min pro Seite",
+        note: "PFLICHT nach Beintraining!"
+      }
+    ]
+  }
+};
 
 export const DEFAULT_WORKOUTS = [
-    {
-      id: 'push_heavy',
-      name: 'Push A',
-      subtitle: 'Heavy Chest & Trizeps',
-      icon: '🏋️',
-      color: 'emerald',
-      day: 1,
-      focus: 'Kraftaufbau & Mechanische Zerstörung der Brustfasern',
-      warmup: ['Band Pull-Aparts 3x20', 'Rotatorenmanschette', 'Schulterkreisen'],
-      exercises: [
-        { id: 'ex1', name: 'Hammer Strength ISO Bench', sets: '4', reps: '6-8', tempo: '3-0-1-0', note: 'TOP SET schwer. Stopp vor Brust. Letzter Satz Dropset', enabled: true },
-        { id: 'ex2', name: 'Hammer Strength MTS Incline', sets: '3', reps: '8-10', tempo: '3-0-1-1', note: 'Ellbogen 45° (Tuck). Explosiv hoch', enabled: true },
-        { id: 'ex3', name: 'Life Fitness Pec Fly', sets: '3', reps: '12-15', tempo: '2-0-1-2', note: 'Iso-Hold: Vorne 2 Sek. halten. Dehnung begrenzen!', enabled: true },
-        { id: 'ex4', name: 'Panatta Multi Flight', sets: '4', reps: '12-15', tempo: '2-0-1-0', note: 'Scaption: Daumen hoch. Ellbogen vor Körper', enabled: true },
-        { id: 'ex5', name: 'Trizeps Pushdowns', sets: '3', reps: '10-12', tempo: '2-0-1-0', note: 'Ellbogen eng am Rippenbogen fixieren', enabled: true },
-        { id: 'ex6', name: 'Overhead Cable Extension', sets: '3', reps: '12-15', tempo: '2-1-1-0', note: 'Sitzend (Bank 90°). Langsamer Stretch', enabled: true },
-      ],
-      rehab: ['Türrahmen-Stretch 2x60s', 'BWS-Rotation'],
-      coachingNotes: [
-        'Schulter-Schutz: Ellbogen stoppen 2-3 cm vor voller Dehnung',
-        'Kein Lockout nach hinten bei Hammer Strength'
-      ]
-    },
-    {
-      id: 'pull_density',
-      name: 'Pull A',
-      subtitle: 'Rücken Dichte & Bizeps',
-      icon: '🦬',
-      color: 'blue',
-      day: 2,
-      focus: 'Rückendichte stabilisiert die Schulter',
-      warmup: ['Dead Hang 30-45s', 'Scapula Pull-ups', 'Band Pull-Aparts'],
-      exercises: [
-        { id: 'ex1', name: 'Panatta Super Power Row', sets: '4', reps: '6-8', tempo: 'X-0-1-0', note: 'Sitzend: Brust fest ans Polster. Explosiv ziehen!', enabled: true },
-        { id: 'ex2', name: 'Hammer Strength MTS Row', sets: '3', reps: '10-12', tempo: '3-0-1-1', note: 'Unilateral/Einarmig. Fokus auf Lat-Squeeze unten', enabled: true },
-        { id: 'ex3', name: 'Panatta Super High Row', sets: '3', reps: '10-12', tempo: '3-1-1-1', note: 'Beidarmig. Oben kurz halten', enabled: true },
-        { id: 'ex4', name: 'Reverse Butterfly (Maschine)', sets: '4', reps: '15-20', tempo: '2-0-1-1', note: 'REHA-Pflicht: Brennen lassen für Infraspinatus', enabled: true },
-        { id: 'ex5', name: 'SZ-Curls (Stehend)', sets: '4', reps: '8-10', tempo: '3-0-1-0', note: 'Rücken an Wand/Säule lehnen. Kein Schwung', enabled: true },
-      ],
-      rehab: ['Face Pulls 3x20', 'Couch Stretch'],
-      coachingNotes: [
-        'Reverse Butterfly ist PFLICHT für Infraspinatus-Reha',
-        'Ersatz für Langhantel-Rudern (Schulter-Schutz)'
-      ]
-    },
-    {
-      id: 'legs',
-      name: 'Legs',
-      subtitle: 'Hamstring Pre-Exhaust & Quads',
-      icon: '🦵',
-      color: 'purple',
-      day: 3,
-      focus: 'Hamstring-Vorermüdung & Quadrizeps-Masse',
-      warmup: ['Couch Stretch 2 Min/Seite', 'Glute Bridges 2x20', '90/90 Hüft-Mobilität'],
-      exercises: [
-        { id: 'ex1', name: 'Life Fitness Leg Curl', sets: '4', reps: '12-15', tempo: '3-0-1-0', note: 'VORERMÜDUNG: Zuerst! Wärmt Knie auf', enabled: true },
-        { id: 'ex2', name: 'Panatta Smith Squats', sets: '4', reps: '8-10', tempo: '3-1-X-0', note: 'Main Lift: Füße etwas weiter vor. Tiefe kontrollieren', enabled: true },
-        { id: 'ex3', name: 'RDL (Kurzhanteln)', sets: '3', reps: '10-12', tempo: '3-0-1-0', note: 'Po weit nach hinten. Fokus: Dehnung Hamstrings', enabled: true },
-        { id: 'ex4', name: 'Walking Lunges', sets: '3', reps: '20 Schritte', tempo: '2-0-1-0', note: 'Stabilisation: Kurzhanteln. Lange Schritte', enabled: true },
-        { id: 'ex5', name: 'Life Fitness Leg Extension', sets: '3', reps: '15-20', tempo: '2-0-1-2', note: 'Finisher: Oben 2 Sek. halten (Squeeze)', enabled: true },
-        { id: 'ex6', name: 'Wadenheben', sets: '4', reps: '10-12', tempo: '2-1-1-1', note: '1 Sekunde Pause in der Dehnung unten', enabled: true },
-      ],
-      rehab: ['Nerve Flossing Ischias', 'Waden Dehnen an Wand'],
-      coachingNotes: [
-        '⚠️ HYPO-GEFAHR: Höchste Insulinsensitivität!',
-        'Leg Curl IMMER zuerst für Knie-Aufwärmung'
-      ]
-    },
-    {
-      id: 'upper_chest',
-      name: 'Upper Chest',
-      subtitle: 'Schwachstelle & Delts',
-      icon: '💪',
-      color: 'amber',
-      day: 4,
-      focus: 'Metabolische Vorermüdung für die Brust (Schulter schonen)',
-      warmup: ['Band Dislocates', 'Arm Kreisen', 'Leichte Flys'],
-      exercises: [
-        { id: 'ex1', name: 'Cable Flys (Low-to-High)', sets: '3', reps: '15-20', tempo: '2-0-1-1', note: 'PRE-EXHAUST: Von unten vor das Gesicht. Pumpt Brust voll', enabled: true },
-        { id: 'ex2', name: 'Hammer Strength MTS Incline', sets: '4', reps: '10-12', tempo: '3-0-1-0', note: 'Volumen: Weniger Gewicht durch Vorermüdung -> Gelenkschonend', enabled: true },
-        { id: 'ex3', name: 'Panatta Multi Flight', sets: '5', reps: '15-20', tempo: '2-0-1-0', note: 'Volumen: 5 Sätze! Kurze Pause (60s). Für V-Taper', enabled: true },
-        { id: 'ex4', name: 'Cable Front Raise (Seil)', sets: '3', reps: '12-15', tempo: '2-0-1-1', note: 'Seil durch die Beine ziehen. Isoliert vordere Schulter', enabled: true },
-        { id: 'ex5', name: 'Floor Skullcrushers', sets: '4', reps: '12-15', tempo: '3-0-1-0', note: 'Dead Stop: Hanteln berühren sanft den Boden', enabled: true },
-      ],
-      rehab: ['Türrahmen-Stretch', 'Unterarm Dehnen'],
-      coachingNotes: [
-        'Pre-Exhaust = weniger Gewicht nötig = Schulter-Schutz',
-        'Multi Flight: 5 Sätze für V-Taper!'
-      ]
-    },
-    {
-      id: 'arms_lats',
-      name: 'Arms & Lats',
-      subtitle: 'Pump Day & Lat Width',
-      icon: '💥',
-      color: 'cyan',
-      day: 5,
-      focus: '3D-Look, Vaskularität & Lat-Breite. Kein Maximalkraft-Tag!',
-      warmup: ['Arm Kreisen', 'Leichte Curls', 'Trizeps Stretch'],
-      exercises: [
-        { id: 'ex1', name: 'Panatta High Row (1-armig)', sets: '4', reps: '12-15', tempo: '3-1-1-1', note: 'Lat-Stretch: Oberkörper eindrehen. Mach dich lang', enabled: true },
-        { id: 'ex2', name: 'Lat Pulldown (Neutral)', sets: '3', reps: '10-12', tempo: '3-0-1-1', note: 'Sauberer Zug zur Brust. Ellbogen führen', enabled: true },
-        { id: 'ex3', name: 'Spider Curls (Bank)', sets: '4', reps: '10-12', tempo: '3-0-1-2', note: 'Peak Squeeze: Brust auf Lehne. Oben 2 Sek. halten', enabled: true },
-        { id: 'ex4', name: 'Triceps Pushdown (1-armig)', sets: '4', reps: '12-15', tempo: '2-0-1-0', note: 'Ohne Griff (Kabel). Nur Pump, kein schweres Drücken!', enabled: true },
-        { id: 'ex5', name: 'Cross-Body Hammer Curls', sets: '3', reps: '10-12', tempo: '2-0-1-0', note: 'Quer vor den Körper ziehen (Brachialis)', enabled: true },
-        { id: 'ex6', name: 'Cable Crunches', sets: '4', reps: '15-20', tempo: '2-1-1-0', note: 'Kniend. Schwer! Einrollen, nicht reißen', enabled: true },
-      ],
-      rehab: ['Bizeps Stretch', 'Trizeps Stretch', 'Lat Stretch'],
-      coachingNotes: [
-        '⚠️ HYPO-GEFAHR: Supersätze erhöhen Insulinsensitivität',
-        'Pump Day = kein Ego-Lifting!'
-      ]
-    },
-    {
-      id: 'rest',
-      name: 'Rest',
-      subtitle: 'Aktive Regeneration',
-      icon: '😴',
-      color: 'slate',
-      day: 0,
-      focus: 'Regeneration & Insulinsensitivität',
-      warmup: [],
-      exercises: [
-        { id: 'ex1', name: 'Spaziergang (Zone 2)', sets: '1', reps: '30-45 Min', tempo: '-', note: 'Puls 100-120. Fördert Regeneration', enabled: true },
-        { id: 'ex2', name: 'Mobility Flow', sets: '1', reps: '15-20 Min', tempo: '-', note: 'Hüfte, Schulter, BWS', enabled: true },
-        { id: 'ex3', name: 'Foam Rolling', sets: '1', reps: '10 Min', tempo: '-', note: 'Fokus: Verspannte Bereiche', enabled: true },
-      ],
-      rehab: ['Couch Stretch', 'Dead Hang', 'Waden Dehnen'],
-      coachingNotes: [
-        'Muscle Sponge: Nach 5 Tagen Training Basalrate evtl. -10% senken',
-        'Schlaf priorisieren!'
-      ]
-    }
-  ];
-  
-  // Workout Farben für UI
-  export const WORKOUT_COLORS = {
-    emerald: { bg: 'bg-emerald-500/20', border: 'border-emerald-500', text: 'text-emerald-400' },
-    blue: { bg: 'bg-blue-500/20', border: 'border-blue-500', text: 'text-blue-400' },
-    purple: { bg: 'bg-purple-500/20', border: 'border-purple-500', text: 'text-purple-400' },
-    amber: { bg: 'bg-amber-500/20', border: 'border-amber-500', text: 'text-amber-400' },
-    cyan: { bg: 'bg-cyan-500/20', border: 'border-cyan-500', text: 'text-cyan-400' },
-    slate: { bg: 'bg-slate-500/20', border: 'border-slate-500', text: 'text-slate-400' },
-  };
-  
-  // Timing Labels für Supplements
-  export const TIMING_OPTIONS = [
-    { id: 'wakeup', label: 'Direkt nach dem Aufstehen', icon: '🌅' },
-    { id: 'morning_meal', label: 'Zum Frühstück', icon: '🍳' },
-    { id: 'pre_workout_60', label: '60 Min vor Training', icon: '⏰' },
-    { id: 'pre_workout_30', label: '30 Min vor Training', icon: '🔥' },
-    { id: 'intra_workout', label: 'Während Training', icon: '💪' },
-    { id: 'post_workout', label: 'Nach dem Training', icon: '✅' },
-    { id: 'evening_meal', label: 'Zum Abendessen', icon: '🍽️' },
-    { id: 'before_bed', label: 'Vor dem Schlafengehen', icon: '🌙' },
-  ];
-  
-  // Frequenz-Optionen
-  export const FREQUENCY_OPTIONS = [
-    { id: 'daily', label: 'Täglich', short: 'Tägl.' },
-    { id: 'training_days', label: 'Nur Trainingstage', short: 'Train.' },
-    { id: 'every_2_days', label: 'Alle 2 Tage', short: '2d' },
-    { id: 'every_3_days', label: 'Alle 3 Tage', short: '3d' },
-    { id: 'weekly', label: '1x pro Woche', short: '1x/Wo' },
-  ];
-  
-  // Tempo Erklärung
-  export const TEMPO_GUIDE = {
-    description: 'Tempo: Exzentrisch-Pause unten-Konzentrisch-Pause oben',
-    example: '3-0-1-0 = 3 Sek. ablassen, keine Pause, 1 Sek. heben, keine Pause',
-    explosive: 'X = Explosiv'
-  };
+  {
+    id: 'push_a',
+    name: 'PUSH A',
+    subtitle: 'Chest & Shoulder Lock',
+    icon: '🔒',
+    color: 'emerald',
+    day: 1,
+    focus: 'Brust-Kraft bei zentrierter Schulter',
+    prehab: 'shoulder_lock',
+    posthab: null,
+    coachingNotes: [
+      '⚠️ Shoulder-Lock Protokoll ist PFLICHT vor dem Training!',
+      '🎯 Schulterblätter aktiv nach unten ziehen bevor du drückst',
+      '🩸 T1D: Bei BZ < 100 vor Training 15g Carbs'
+    ],
+    exercises: [
+      {
+        id: 'hammer_iso_bench',
+        name: 'Hammer Strength ISO Bench',
+        muscle: 'Pectoralis Major (Sternal)',
+        execution: 'Schulterblätter nach unten ziehen ("Hosentasche"), bevor du drückst. Stopp vor der Brust.',
+        sets: 4,
+        reps: '6-8',
+        enabled: true
+      },
+      {
+        id: 'hammer_mts_incline',
+        name: 'Hammer Strength MTS Incline',
+        muscle: 'Pectoralis Major (Clavicular)',
+        execution: 'Ellbogen 45° Tuck. Schützt die Kapsel.',
+        sets: 3,
+        reps: '8-10',
+        enabled: true
+      },
+      {
+        id: 'life_fitness_pec_fly',
+        name: 'Life Fitness Pec Fly',
+        muscle: 'Pectoralis (Innen)',
+        execution: 'Fokus auf Adduktion (Zusammenführen). Nicht reißen!',
+        sets: 3,
+        reps: '12-15',
+        enabled: true
+      },
+      {
+        id: 'panatta_multi_flight',
+        name: 'Panatta Multi Flight',
+        muscle: 'Lateral Deltoid (Scaption)',
+        execution: 'Daumen hoch. Supraspinatus gleitet frei.',
+        sets: 4,
+        reps: '12-15',
+        enabled: true
+      },
+      {
+        id: 'triceps_pushdowns',
+        name: 'Trizeps Pushdowns',
+        muscle: 'Triceps (Lateral/Medial)',
+        execution: 'Ellbogen fixiert.',
+        sets: 3,
+        reps: '10-12',
+        enabled: true
+      },
+      {
+        id: 'overhead_cable_ext',
+        name: 'Overhead Cable Extension',
+        muscle: 'Triceps (Long Head)',
+        execution: 'Dehnung. Sitzend (stabilisiert Rumpf).',
+        sets: 3,
+        reps: '12-15',
+        enabled: true
+      }
+    ]
+  },
+  {
+    id: 'pull_a',
+    name: 'PULL A',
+    subtitle: 'Back & Pelvic Activation',
+    icon: '🔙',
+    color: 'blue',
+    day: 2,
+    focus: 'Latissimus & Core-Stabilität (Kein Hohlkreuz beim Rudern)',
+    prehab: 'pelvic_reset',
+    posthab: null,
+    coachingNotes: [
+      '⚠️ 3 Sätze Dead Bugs vor Beginn (Pelvic Reset)!',
+      '🎯 Core fest wie beim Dead Bug während Rudern',
+      '🩸 T1D: Rudern kann BZ senken - Monitor!'
+    ],
+    exercises: [
+      {
+        id: 'panatta_super_power_row',
+        name: 'Panatta Super Power Row',
+        muscle: 'Latissimus Dorsi (Gesamt)',
+        execution: 'Core fest (wie beim Dead Bug). Brust ans Polster. Zieh aus dem Ellbogen.',
+        sets: 4,
+        reps: '6-8',
+        enabled: true
+      },
+      {
+        id: 'hammer_mts_row',
+        name: 'Hammer Strength MTS Row',
+        muscle: 'Latissimus (Unterer Anteil)',
+        execution: 'Einarmig. Seitneigung erlaubt für maximalen Stretch.',
+        sets: 3,
+        reps: '10-12',
+        enabled: true
+      },
+      {
+        id: 'panatta_super_high_row',
+        name: 'Panatta Super High Row',
+        muscle: 'Teres Major & Lat (Oben)',
+        execution: 'Beidarmig. Schulterblätter unten lassen.',
+        sets: 3,
+        reps: '10-12',
+        enabled: true
+      },
+      {
+        id: 'reverse_butterfly',
+        name: 'Reverse Butterfly',
+        muscle: 'Infraspinatus & Posterior Delt',
+        execution: 'Fokus: Rotation nach außen, nicht nur nach hinten ziehen.',
+        sets: 4,
+        reps: '15-20',
+        note: '🏥 REHA-Pflicht!',
+        enabled: true
+      },
+      {
+        id: 'sz_curls',
+        name: 'SZ-Curls (Stehend)',
+        muscle: 'Biceps Brachii',
+        execution: 'Rücken an Wand. Glutes anspannen (verhindert Hohlkreuz).',
+        sets: 4,
+        reps: '8-10',
+        enabled: true
+      }
+    ]
+  },
+  {
+    id: 'legs',
+    name: 'LEGS',
+    subtitle: 'Quads & Pelvic Release',
+    icon: '🦵',
+    color: 'purple',
+    day: 3,
+    focus: 'Quadrizeps ohne LWS-Belastung',
+    prehab: 'pelvic_reset',
+    posthab: 'couch_stretch',
+    coachingNotes: [
+      '⚠️ Cook Hip Lift vor Squats (Glute Aktivierung)!',
+      '⚠️ Couch Stretch nach Training ist PFLICHT!',
+      '🩸 T1D: Beintraining = höchster Glykogenverbrauch. Post-Workout Carbs!'
+    ],
+    exercises: [
+      {
+        id: 'leg_curl',
+        name: 'Life Fitness Leg Curl',
+        muscle: 'Hamstrings (Beinbeuger)',
+        execution: 'Vorermüdung sichert das Kniegelenk.',
+        sets: 4,
+        reps: '12',
+        note: '⚡ VORERMÜDUNG',
+        enabled: true
+      },
+      {
+        id: 'smith_squats',
+        name: 'Panatta Smith Squats',
+        muscle: 'Quadrizeps',
+        execution: 'Füße vor. Becken neutral halten (nicht ins Hohlkreuz fallen!).',
+        sets: 4,
+        reps: '8-10',
+        enabled: true
+      },
+      {
+        id: 'rdl_db',
+        name: 'RDL (Kurzhanteln)',
+        muscle: 'Gluteus & Hamstrings',
+        execution: 'Hip Hinge Bewegung. Rücken bleibt "Brett".',
+        sets: 3,
+        reps: '10-12',
+        enabled: true
+      },
+      {
+        id: 'leg_press',
+        name: 'Leg Press / Hackenschmidt',
+        muscle: 'Quads (Vastus Medialis)',
+        execution: 'Tiefe Position kontrollieren.',
+        sets: 3,
+        reps: '15-20',
+        enabled: true
+      },
+      {
+        id: 'calf_raise',
+        name: 'Wadenheben',
+        muscle: 'Gastrocnemius',
+        execution: 'Volle Dehnung unten.',
+        sets: 4,
+        reps: '10-12',
+        enabled: true
+      }
+    ]
+  },
+  {
+    id: 'upper_chest',
+    name: 'WEAK POINT',
+    subtitle: 'Upper Chest & Rehab',
+    icon: '🎯',
+    color: 'amber',
+    day: 4,
+    focus: 'Vorermüdung für die obere Brust',
+    prehab: 'shoulder_lock',
+    posthab: null,
+    coachingNotes: [
+      '⚠️ Shoulder-Lock Protokoll durchführen!',
+      '🎯 Gewicht reduziert wegen Vorermüdung',
+      '🩸 T1D: Leichteres Training = weniger BZ-Schwankung'
+    ],
+    exercises: [
+      {
+        id: 'cable_fly_low_high',
+        name: 'Cable Flys (Low-to-High)',
+        muscle: 'Pec Major (Clavicular)',
+        execution: 'Vorermüdung. Ellbogen leicht gebeugt.',
+        sets: 3,
+        reps: '15-20',
+        note: '⚡ PRE-EXHAUST',
+        enabled: true
+      },
+      {
+        id: 'hammer_mts_incline_2',
+        name: 'Hammer Strength MTS Incline',
+        muscle: 'Obere Brust',
+        execution: 'Gewicht reduziert (wegen Vorermüdung). Perfekte Kontrolle.',
+        sets: 4,
+        reps: '10-12',
+        enabled: true
+      },
+      {
+        id: 'panatta_multi_flight_2',
+        name: 'Panatta Multi Flight',
+        muscle: 'Lateral Delt',
+        execution: 'Scaption Ebene. Hohes Volumen für V-Taper.',
+        sets: 5,
+        reps: '15-20',
+        note: '5 Sätze!',
+        enabled: true
+      },
+      {
+        id: 'cable_front_raise',
+        name: 'Cable Front Raise (Seil)',
+        muscle: 'Anterior Delt',
+        execution: 'Durch die Beine ziehen. Neutraler Griff schont Schulter.',
+        sets: 3,
+        reps: '12-15',
+        enabled: true
+      },
+      {
+        id: 'floor_skullcrushers',
+        name: 'Floor Skullcrushers',
+        muscle: 'Triceps',
+        execution: 'Bodenkontakt = Stopp. Schont Infraspinatus-Sehne.',
+        sets: 4,
+        reps: '12-15',
+        enabled: true
+      }
+    ]
+  },
+  {
+    id: 'pump',
+    name: 'PUMP',
+    subtitle: 'Arms & Lat Width',
+    icon: '💪',
+    color: 'cyan',
+    day: 5,
+    focus: 'Arm-Volumen & Lat-Breite',
+    prehab: null,
+    posthab: null,
+    coachingNotes: [
+      '🎯 Pump-Tag: Höhere Wiederholungen, kürzere Pausen',
+      '💪 Mind-Muscle Connection > Gewicht',
+      '🩸 T1D: Pump-Training = stabiler BZ'
+    ],
+    exercises: [
+      {
+        id: 'panatta_high_row_single',
+        name: 'Panatta High Row (1-armig)',
+        muscle: 'Latissimus (Breite)',
+        execution: 'Fokus auf Stretch und Kontraktion.',
+        sets: 3,
+        reps: '12-15',
+        enabled: true
+      },
+      {
+        id: 'lat_pulldown_neutral',
+        name: 'Lat Pulldown (Neutral)',
+        muscle: 'Latissimus',
+        execution: 'Enger neutraler Griff. Schultern unten.',
+        sets: 3,
+        reps: '12-15',
+        enabled: true
+      },
+      {
+        id: 'spider_curls',
+        name: 'Spider Curls',
+        muscle: 'Biceps (Peak)',
+        execution: 'Brust auf Schrägbank. Maximale Kontraktion oben.',
+        sets: 4,
+        reps: '12-15',
+        enabled: true
+      },
+      {
+        id: 'triceps_pushdown_single',
+        name: 'Triceps Pushdown (1-armig)',
+        muscle: 'Triceps',
+        execution: 'Rotation am Ende für lateralen Kopf.',
+        sets: 3,
+        reps: '12-15',
+        enabled: true
+      },
+      {
+        id: 'cross_body_hammer',
+        name: 'Cross-Body Hammer Curls',
+        muscle: 'Brachialis',
+        execution: 'Über den Körper curlen.',
+        sets: 3,
+        reps: '12-15',
+        enabled: true
+      },
+      {
+        id: 'cable_crunches',
+        name: 'Cable Crunches',
+        muscle: 'Rectus Abdominis',
+        execution: 'Nicht aus der Hüfte ziehen!',
+        sets: 3,
+        reps: '15-20',
+        enabled: true
+      }
+    ]
+  },
+  {
+    id: 'rest',
+    name: 'REST',
+    subtitle: 'Aktive Regeneration',
+    icon: '😴',
+    color: 'slate',
+    day: 0,
+    focus: 'Regeneration & Mobility',
+    prehab: null,
+    posthab: 'couch_stretch',
+    coachingNotes: [
+      '🚶 Spaziergang (20-30 Min) für aktive Erholung',
+      '🧘 Mobility Flow optional',
+      '🩸 T1D: Ruhetag = Basalrate überprüfen'
+    ],
+    exercises: [
+      {
+        id: 'walk',
+        name: 'Spaziergang Zone 2',
+        muscle: 'Aktive Regeneration',
+        execution: 'Lockeres Gehen, Puls 100-120.',
+        sets: 1,
+        reps: '20-30 Min',
+        enabled: true
+      },
+      {
+        id: 'mobility_flow',
+        name: 'Mobility Flow',
+        muscle: 'Ganzkörper',
+        execution: 'Hüftkreise, Schulterkreise, Cat-Cow.',
+        sets: 1,
+        reps: '10 Min',
+        enabled: true
+      },
+      {
+        id: 'foam_rolling',
+        name: 'Foam Rolling',
+        muscle: 'Faszien',
+        execution: 'Quads, IT-Band, Thoracic Spine.',
+        sets: 1,
+        reps: '10 Min',
+        enabled: true
+      }
+    ]
+  }
+];
+
+export const WORKOUT_COLORS = {
+  emerald: 'bg-emerald-500/20 border-emerald-500/50 text-emerald-400',
+  blue: 'bg-blue-500/20 border-blue-500/50 text-blue-400',
+  purple: 'bg-purple-500/20 border-purple-500/50 text-purple-400',
+  amber: 'bg-amber-500/20 border-amber-500/50 text-amber-400',
+  cyan: 'bg-cyan-500/20 border-cyan-500/50 text-cyan-400',
+  slate: 'bg-slate-500/20 border-slate-500/50 text-slate-400'
+};
+
+export default DEFAULT_WORKOUTS;
